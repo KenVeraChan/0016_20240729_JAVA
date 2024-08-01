@@ -1,0 +1,93 @@
+ARRAYS (OPCIONAL)
+Descripción
+Realiza un programa que mediante funciones manipule los objetos String almacenados en un Array.
+
+El programa debe de solicitar en el arranque el tamaño inicial del mismo.
+
+Luego debemos cumplimentar las siguientes Opciones:
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+System.out.println("Selecciona una opción");
+
+System.out.println("----------------------");
+
+System.out.println("1. LLenar el Array");
+
+System.out.println("2. LLenar el Array sin duplicados");
+
+System.out.println("3. LLenar el Array uno a uno (inserar un solo nombre, despues del ultimo insertado");
+
+System.out.println("4. Cambia todas una letra en todo el array por la que le indiquemos.");
+
+System.out.println("5. Quita todos los espacios que tenga una palabra al principio y/o al final");
+
+System.out.println("6. Imprimir lista original");
+
+System.out.println("7. Remplazar un nombre dandole la posición");
+
+System.out.println("8. Imprimir toda la lista en mayusculas");
+
+System.out.println("9. Imprimir toda la lista en minusculas");
+
+System.out.println("10. Cambia un nombre que te doy por otro que tambien te doy");
+
+System.out.println("11. dame la posición de un nombre que te indico");
+
+System.out.println("12. Vacia el array poniendo una cadena vacia en cada posición");
+
+System.out.println("13. Te doy un nombre y una posición y la remplazas en el array");
+
+System.out.println("14. Escribe una palabra formada de la primera letra de cada una que tenemos en el array");
+
+System.out.println("15. Cambia el tamaño del array");
+
+System.out.println("16. Dime el número de caracteres que tiene una palabra si te doy su posición");
+
+System.out.println("17. Cuantos elementos tengo en el Array");
+
+System.out.println("0. Salir");
+
+ 
+
+AYUDA: 
+
+https://contenidos.mentesinquietas.net/la-clase-string-ejercicio/

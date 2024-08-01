@@ -1,0 +1,28 @@
+RESUELTO: Sobrecarga de Métodos, solución emplear más o menos cantidad de variables intervenientes
+
+
+
+package poo1;
+public class Perro {
+private String Nombre="";
+private String Raza;
+private String Color;
+private float Altura;
+	//Constructor por defecto
+	public Perro()
+	{
+		
+	}
+	public Perro(String Nombre, String Raza)
+	{
+		this.Nombre=Nombre;
+		this.Raza= Raza;
+	}
+	public Perro(String Nombre, String Color)
+	{
+		this.Nombre=Nombre;
+		this.Color=Color;
+	}
+}
+13:24
+aquí da error en public Perro aún cuando las variables que tiene por atributos son diferentes
