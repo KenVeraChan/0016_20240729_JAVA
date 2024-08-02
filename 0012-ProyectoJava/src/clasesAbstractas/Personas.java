@@ -32,3 +32,31 @@ class Empleados extends Personas
 	}
 	
 }
+class Jefes extends Empleados
+{
+
+	public Jefes(String nombre, Date fechaAlta, double sueldo) {
+		super(nombre, fechaAlta, sueldo);
+		// TODO Auto-generated constructor stub
+	}
+	
+}
+class Alumnos extends Personas
+{
+	private String asignaturasOptativas;
+	private String aula;
+	
+	public Alumnos(String nombre, String asignaturasOptativas, String aula) {
+		super(nombre);
+		this.asignaturasOptativas=asignaturasOptativas;
+		this.aula=aula;
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getDescripcion() {
+		// TODO Auto-generated method stub
+		return "El alumno: "+this.getNombre()+" está en el aula: "+this.aula
+				+ " y ha escogido la asignatura: "+this.asignaturasOptativas;
+	}
+	
+}
