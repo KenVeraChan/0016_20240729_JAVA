@@ -17,6 +17,12 @@ public class UsoPersonas {
 		Alumnos Sharyllin= new Alumnos("Sharyllin","Dibujo","Aula 5");
 		System.out.println(Sharyllin.getNombre());
 		System.out.println(Sharyllin.getDescripcion());
+		
+		Jefes Josh= new Jefes("Josh Aneitor",new Date(654654),4800);
+		Josh.setCargo("Director de I+D+I");
+		System.out.println(Josh.getNombre());
+		System.out.println(Josh.getDescripcion()+Josh.getCargo());
+		
 	}
 
 }

@@ -2,6 +2,8 @@ package clasesAbstractas;
 
 import java.util.Date;
 
+import interfaces.ParaJefes;
+
 public abstract class Personas {
 	
 	private String nombre;
@@ -32,12 +34,22 @@ class Empleados extends Personas
 	}
 	
 }
-class Jefes extends Empleados
+class Jefes extends Empleados implements ParaJefes
 {
 
+	private String cargo;
 	public Jefes(String nombre, Date fechaAlta, double sueldo) {
 		super(nombre, fechaAlta, sueldo);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void setCargo(String cargo) {
+		this.cargo=cargo;
+	}
+
+	public String getCargo() {
+		// TODO Auto-generated method stub
+		return " y además tiene un cargo de: "+ this.cargo;
 	}
 	
 }
