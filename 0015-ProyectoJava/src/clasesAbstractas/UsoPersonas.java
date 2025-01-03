@@ -31,10 +31,6 @@ public class UsoPersonas {
 		for(int i=0; i<SFER4D.length;i++)
 		{
 			System.out.println(SFER4D[i].getDescripcion());
-		}
-		
-		
-		
+		}		
 	}
-
 }

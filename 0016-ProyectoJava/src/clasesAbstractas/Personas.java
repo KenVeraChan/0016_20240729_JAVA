@@ -3,6 +3,7 @@ import java.util.Date;
 
 import interfaces.ParaJefes;
 import interfaces.ParaTrabajadores;
+import interfaces.Comparable;
 
 public abstract class Personas {
 	
@@ -30,7 +31,7 @@ class Empleados extends Personas implements Comparable,ParaTrabajadores
 	}
 
 	public String getDescripcion() {
-		return "El empleado: "+this.getNombre()+" tiene un sueldo de: "+this.sueldo+"€"+". Y entro a trabajar en: "+this.fechaAlta;
+		return "El empleado: "+this.getNombre()+" tiene un sueldo de: "+this.sueldo+"ï¿½"+". Y entro a trabajar en: "+this.fechaAlta;
 	}
 
 	public int compareTo(Object o) {
@@ -86,7 +87,7 @@ class Alumnos extends Personas
 
 	public String getDescripcion() {
 		// TODO Auto-generated method stub
-		return "El alumno: "+this.getNombre()+" está en el aula: "+this.aula
+		return "El alumno: "+this.getNombre()+" estï¿½ en el aula: "+this.aula
 				+ " y ha escogido la asignatura: "+this.asignaturasOptativas;
 	}
 	
