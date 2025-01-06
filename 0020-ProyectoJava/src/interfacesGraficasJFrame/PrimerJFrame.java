@@ -17,6 +17,7 @@ class MiFrame extends JFrame
 		setLocation(150, 150);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true); //Siempre al final esta sentencia
+		setTitle("Ventana de pruebas");
 	}
 }
 
