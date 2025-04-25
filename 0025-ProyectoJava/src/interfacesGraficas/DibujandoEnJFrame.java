@@ -40,6 +40,12 @@ class laminaDibujo extends JPanel
 			g.drawRect(20+130*desplazamiento, 20, 125, 75);
 		}
 		Graphics2D g2= (Graphics2D)g;  /*Casting de transformación del objeto g en un objeto Graphics 2D almacenado en g2*/
+		Graphics2D g3= (Graphics2D)g;
+		
+		/*TRAZADO DE UNA CURVA CUÁDRICA*/
+		QuadCurve2D parabola= new QuadCurve2D.Double();
+		parabola.setCurve(120, 120, 200, 360, 280, 120);
+		g3.draw(parabola);
 		
 		/*TRAZADO DEL RECTANGULO*/
 		Rectangle2D rectangulo = new Rectangle2D.Double(100,100,200,150);
@@ -50,10 +56,7 @@ class laminaDibujo extends JPanel
 		g2.setStroke(milapiz);
 		g2.draw(rectangulo);
 		
-		/*TRAZADO DE UNA CURVA CUÁDRICA*/
-		QuadCurve2D parabola= new QuadCurve2D.Double();
-		parabola.setCurve(120, 120, 200, 360, 280, 120);
-		g2.draw(parabola);
+
 	}
 }
 
