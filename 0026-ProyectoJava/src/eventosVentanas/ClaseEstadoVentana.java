@@ -1,10 +1,7 @@
 package eventosVentanas;
-
 import java.awt.Frame;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
-
 import javax.swing.JFrame;
 
 public class ClaseEstadoVentana {
