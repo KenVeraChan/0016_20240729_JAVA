@@ -15,8 +15,10 @@ public class claseFocos {
 	public static void main(String[] args) {
 		fondoFoco1 ventana1= new fondoFoco1();
 		fondoFoco2 ventana2= new fondoFoco2();
+		fondoFoco3 ventana3= new fondoFoco3();
 		ventana1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		ventana2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		ventana3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 }
 
@@ -27,9 +29,7 @@ class fondoFoco1 extends JFrame
 	laminabotonera lamina= new laminabotonera();
 	lamina.botonera1();
 	add(lamina);
-	lamina.laminaFoco();
-	add(lamina);
-	setBounds(200,300,300,300);
+	setBounds(100,300,300,300);
 	setTitle("Ventana de Foco 1");
 	setVisible(true);
 	}
@@ -42,8 +42,20 @@ class fondoFoco2 extends JFrame
 	laminabotonera lamina= new laminabotonera();
 	lamina.botonera2();
 	add(lamina);
-	setBounds(600,300,300,300);
+	setBounds(400,300,300,300);
 	setTitle("Ventana de Foco 2");
+	setVisible(true);
+	}
+}
+class fondoFoco3 extends JFrame
+{
+	public fondoFoco3()
+	{
+	laminabotonera cajasTexto= new laminabotonera();
+	cajasTexto.laminaFoco();
+	add(cajasTexto);
+	setBounds(700,300,300,300);
+	setTitle("Ventana de Foco 3");
 	setVisible(true);
 	}
 }
