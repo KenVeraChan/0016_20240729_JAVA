@@ -2,7 +2,8 @@ package layout001;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.DisplayMode;
+import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +21,7 @@ class MarcoGlobal extends JFrame
 	public MarcoGlobal()
 	{
 		setTitle("Practicas de Layout");
-		setBounds(300,200,600,300);
+		setBounds(400,200,450,450);
 		/*  EL CODIGO DEL LAYOUT, SERÍA EL MOSTRADO, PERO SE PUEDE SIMPLFICAR
 		laminas nuevaLamina= new laminas();
 		FlowLayout disposicion= new FlowLayout(FlowLayout.RIGHT);
@@ -49,12 +50,6 @@ class laminas1 extends JPanel
 	public laminas1()
 	{
 		//PANEL PARA EL setLayout
-		setLayout(new FlowLayout(FlowLayout.RIGHT));
-		setBackground(new Color(20,220,160));
-		JButton boton1 = new JButton("ENVIAR");
-		JButton boton2 = new JButton("CANCELAR");
-		add(boton1);
-		add(boton2);
 	}
 }
 class laminas2 extends JPanel
@@ -64,11 +59,48 @@ class laminas2 extends JPanel
 		//PANEL PARA EL BorderLayout
 		setLayout(new BorderLayout());
 		setBackground(new Color(20,220,160));
-		JButton boton3 = new JButton("EJECUTAR");
-		JButton boton4 = new JButton("COMPRAR");
-		JButton boton5 = new JButton("VENDER");
+		JButton boton3 = new JButton("C");
+		JButton boton5 = new JButton("=");
+		botonesNumeros calculadora= new botonesNumeros();
+		botonesOperaciones operaciones= new botonesOperaciones();
+		add(operaciones,BorderLayout.NORTH);
 		add(boton3, BorderLayout.WEST);	
-		add(boton4, BorderLayout.CENTER);
 		add(boton5, BorderLayout.EAST);
+		add(calculadora);
+	}
+}
+class botonesNumeros extends JPanel
+{
+	public botonesNumeros()
+	{
+		GridLayout calculo = new GridLayout(3,4,2,2);	
+		setLayout(calculo);
+		add(new JButton("0"));
+		add(new JButton("1"));
+		add(new JButton("2"));
+		add(new JButton("3"));
+		add(new JButton("4"));
+		add(new JButton("5"));
+		add(new JButton("6"));
+		add(new JButton("7"));
+		add(new JButton("8"));
+		add(new JButton("9"));
+		add(new JButton(","));
+		add(new JButton("+/-"));
+		setVisible(true);
+	}
+}
+class botonesOperaciones extends JPanel
+{
+	public botonesOperaciones()
+	{
+		GridLayout calculo = new GridLayout(1,5,2,2);	
+		setLayout(calculo);
+		add(new JButton("+"));
+		add(new JButton("-"));
+		add(new JButton("*"));
+		add(new JButton("/"));
+		add(new JButton("SQRT()"));
+		setVisible(true);
 	}
 }
