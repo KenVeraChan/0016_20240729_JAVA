@@ -1,4 +1,4 @@
-package componentesSwing;
+package componentesSwingJTextField;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,13 +28,13 @@ class fondoVentana extends JFrame
 	{
 		
 		//LAMINA PRINCIPAL
-		setBounds(400,300,400,400);
+		setBounds(500,200,270,150);
 		setTitle("Ventana de JTextField");
 		
 		//SE INCLUYE EL FONDO
 	    setLayout(new BorderLayout());
 
-	    JLabel header = new JLabel("Informacion");
+	    JLabel header = new JLabel("AREA DE LOGIN");
 	    header.setHorizontalAlignment(SwingConstants.CENTER);
 	    header.setFont(new Font("Serif", Font.PLAIN, 24));
 	    add(header, BorderLayout.NORTH);
@@ -59,33 +59,39 @@ class laminaPrimera extends JPanel implements ActionListener
         GridBagConstraints c = new GridBagConstraints();
         setFont(new Font("SansSerif", Font.PLAIN, 14));
         setLayout(gridbag);
-        c.gridwidth = 1;
-        c.gridheight=1;
-        c.weightx = 1;
-        c.weighty = 1;
         
         //COMPONENTES
-        texto= new JLabel("Escribir un texto: ");
-        c.gridx = 0;
-        c.gridy = 0;
+        texto= new JLabel("USER: ",JLabel.LEFT);
+        c.gridx = 0; // El área de texto empieza en la columna cero.
+        c.gridy = 0; // El área de texto empieza en la fila cero
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add (texto, c);
         add(texto, c);
-		CuadroTexto = new JTextField(20);
-        c.gridx = 1;
-        c.gridy = 0;
+		CuadroTexto = new JTextField(10);
+        c.gridx = 2; // El área de texto empieza en la columna tres.
+        c.gridy = 0; // El área de texto empieza en la fila cero
+        c.gridwidth = 2; // El área de texto ocupa dos columnas.
+        c.gridheight = 1; // El área de texto ocupa una fila.
         add(CuadroTexto, c);
-		textoReceptor= new JLabel("Texto aparece aquí: ");
-        c.gridx = 0;
-        c.gridy = 2;
-        c.gridwidth=50;
+		textoReceptor= new JLabel("PASSWORD: ",JLabel.LEFT);
+        c.gridx = 0; // El área de texto empieza en la columna cero.
+        c.gridy = 1; // El área de texto empieza en la fila uno
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
         add(textoReceptor, c);
-		CuadroReceptor = new JTextField(20);
-        c.gridx = 1;
-        c.gridy = 2;
+		CuadroReceptor = new JTextField(10);
+        c.gridx = 2; // El área de texto empieza en la columna tres.
+        c.gridy = 1; // El área de texto empieza en la fila uno
+        c.gridwidth = 2; // El área de texto ocupa dos columnas.
+        c.gridheight = 1; // El área de texto ocupa una fila.
         add(CuadroReceptor, c);
-		botonSacarTexto= new JButton("Extrae Texto");
-		botonSacarTexto.setPreferredSize(new Dimension(200,20));
-        c.gridx = 0;
-        c.gridy = 3;
+		botonSacarTexto= new JButton("SEND");
+		botonSacarTexto.setPreferredSize(new Dimension(190,20));
+        c.gridx = 0; // El área de texto empieza en la columna cero.
+        c.gridy = 3; // El área de texto empieza en la fila cuatro
+        c.gridwidth = 4; // El área de texto ocupa cuatro columnas.
+        c.gridheight = 1; // El área de texto ocupa una fila.
         add(botonSacarTexto, c);
 		botonSacarTexto.addActionListener(this);
 	}
