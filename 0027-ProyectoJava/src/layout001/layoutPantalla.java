@@ -2,11 +2,13 @@ package layout001;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,14 +26,8 @@ class MarcoGlobal extends JFrame
 	public MarcoGlobal()
 	{
 		setTitle("Practicas de Layout");
-		setBounds(400,200,450,150);
+		setBounds(400,200,160,250);
 		setResizable(false);
-		/*  EL CODIGO DEL LAYOUT, SERÍA EL MOSTRADO, PERO SE PUEDE SIMPLFICAR
-		laminas nuevaLamina= new laminas();
-		FlowLayout disposicion= new FlowLayout(FlowLayout.RIGHT);
-		nuevaLamina.setLayout(disposicion);
-		add(nuevaLamina);
-		*/
 		laminas0 fondoLamina= new laminas0();
 		laminas1 nuevaLamina1= new laminas1();
 		add(fondoLamina);
@@ -44,7 +40,7 @@ class laminas0 extends JPanel
 	public laminas0()
 	{
 		//PANEL PARA EL setLayout
-		setBackground(new Color(20,220,160));
+		setBackground(new Color(20,120,160));
 	}
 }
 class laminas1 extends JPanel implements ActionListener
@@ -53,76 +49,192 @@ class laminas1 extends JPanel implements ActionListener
 	private static String sentencia="";
 	private static int comprobante=0;
 	private static String caracter="";
-	TextField pantalla = new TextField("Hola Mundo",40);
+	TextField pantalla = new TextField("Hola Mundo",13);
 	public laminas1()
 	{
 		//PANEL PARA EL setLayout
 		//PANEL PARA EL BorderLayout
-		setLayout(new BorderLayout());
 		setBackground(new Color(20,220,160));
-		JButton boton3 = new JButton("C");
-		JButton boton5 = new JButton("=");
 		botonera();
-		add(pantalla,BorderLayout.NORTH);
-		add(boton3, BorderLayout.WEST);	
-		add(boton5, BorderLayout.EAST);
-
 	}
 	public void botonera()
 	{
-		FlowLayout instrumental= new FlowLayout();
-		setLayout(instrumental);
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        setFont(new Font("SansSerif", Font.PLAIN, 14));
+        setLayout(gridbag);
+        
+        //COMPONENTES
+        c.gridx = 0; // El área de texto empieza en la columna cero.
+        c.gridy = 0; // El área de texto empieza en la fila cero
+        c.gridwidth = 3; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+		add(pantalla,c);
+       
+        //CERO
 		JButton cero= new JButton("0");
-		JButton uno= new JButton("1");
-		JButton dos= new JButton("2");
-		JButton tres= new JButton("3");
-		JButton cuatro= new JButton("4");
-		JButton cinco= new JButton("5");
-		JButton seis= new JButton("6");
-		JButton siete= new JButton("7");
-		JButton ocho= new JButton("8");
-		JButton nueve= new JButton("9");
-		JButton coma= new JButton(",");
-		JButton signo= new JButton("signo");
-		JButton suma= new JButton("+");
-		JButton resta= new JButton("-");
-		JButton producto= new JButton("*");
-		JButton cociente= new JButton("/");
-		JButton raiz= new JButton("raiz");
+        c.gridx = 0; // El área de texto empieza en la columna cero.
+        c.gridy = 1; // El área de texto empieza en la fila uno
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        cero.setSize(10, 5);
+        add(cero, c);
 		cero.addActionListener(this);
+
+        //UNO
+		JButton uno= new JButton("1");
+        c.gridx = 1; // El área de texto empieza en la columna uno.
+        c.gridy = 1; // El área de texto empieza en la fila uno
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(uno, c);
 		uno.addActionListener(this);
+
+        //DOS
+		JButton dos= new JButton("2");
+        c.gridx = 2; // El área de texto empieza en la columna dos.
+        c.gridy = 1; // El área de texto empieza en la fila uno
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(dos, c);
 		dos.addActionListener(this);
+
+        //TRES
+		JButton tres= new JButton("3");
+        c.gridx = 0; // El área de texto empieza en la columna cero.
+        c.gridy = 2; // El área de texto empieza en la fila dos
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(tres, c);
 		tres.addActionListener(this);
+
+        //CUATRO
+		JButton cuatro= new JButton("4");
+        c.gridx = 1; // El área de texto empieza en la columna uno.
+        c.gridy = 2; // El área de texto empieza en la fila dos
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(cuatro, c);
 		cuatro.addActionListener(this);
+
+        //CINCO
+		JButton cinco= new JButton("5");
+        c.gridx = 2; // El área de texto empieza en la columna dos.
+        c.gridy = 2; // El área de texto empieza en la fila dos
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(cinco, c);
 		cinco.addActionListener(this);
+
+        //SEIS
+		JButton seis= new JButton("6");
+        c.gridx = 0; // El área de texto empieza en la columna cero.
+        c.gridy = 3; // El área de texto empieza en la fila tres
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(seis, c);
 		seis.addActionListener(this);
+
+        //SIETE
+		JButton siete= new JButton("7");
+        c.gridx = 1; // El área de texto empieza en la columna uno.
+        c.gridy = 3; // El área de texto empieza en la fila tres
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(siete, c);
 		siete.addActionListener(this);
+
+        //OCHO
+		JButton ocho= new JButton("8");
+        c.gridx = 2; // El área de texto empieza en la columna dos.
+        c.gridy = 3; // El área de texto empieza en la fila tres
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(ocho, c);
 		ocho.addActionListener(this);
+
+        //NUEVE
+		JButton nueve= new JButton("9");
+        c.gridx = 0; // El área de texto empieza en la columna cero.
+        c.gridy = 4; // El área de texto empieza en la fila cuatro
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(nueve, c);
 		nueve.addActionListener(this);
+
+        //SIGNO COMA
+		JButton coma= new JButton(",");
+        c.gridx = 1; // El área de texto empieza en la columna uno.
+        c.gridy = 4; // El área de texto empieza en la fila cuatro
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        coma.setPreferredSize(new Dimension(40,25));
+        add(coma, c);
 		coma.addActionListener(this);
-		signo.addActionListener(this);
+
+        //SIGNO SUMA
+		JButton suma= new JButton("+");
+        c.gridx = 2; // El área de texto empieza en la columna dos.
+        c.gridy = 4; // El área de texto empieza en la fila cuatro
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(suma, c);
 		suma.addActionListener(this);
+
+        //SIGNO RESTA
+		JButton resta= new JButton("-");
+        c.gridx = 0; // El área de texto empieza en la columna cero.
+        c.gridy = 5; // El área de texto empieza en la fila cinco
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(resta, c);
 		resta.addActionListener(this);
-		producto.addActionListener(this);
-		cociente.addActionListener(this);
+
+        //SIGNO MULTIPLICACION
+		JButton multiplicacion= new JButton("*");
+        c.gridx = 1; // El área de texto empieza en la columna uno.
+        c.gridy = 5; // El área de texto empieza en la fila cinco
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(multiplicacion, c);
+		multiplicacion.addActionListener(this);
+
+        //SIGNO DIVISION
+		JButton division= new JButton("/");
+        c.gridx = 2; // El área de texto empieza en la columna dos.
+        c.gridy = 5; // El área de texto empieza en la fila cinco
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(division, c);
+		division.addActionListener(this);
+
+        //SIGNO RAIZ
+		JButton raiz= new JButton("R");
+        c.gridx = 0; // El área de texto empieza en la columna cero.
+        c.gridy = 6; // El área de texto empieza en la fila seis
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(raiz, c);
 		raiz.addActionListener(this);
-		add(cero);
-		add(uno);
-		add(dos);
-		add(tres);
-		add(cuatro);
-		add(cinco);
-		add(seis);
-		add(siete);
-		add(ocho);
-		add(nueve);
-		add(coma);
-		add(signo);
-		add(suma);
-		add(resta);
-		add(producto);
-		add(cociente);
-		add(raiz);
+		
+        //SIGNO BORRAR
+		JButton borrar= new JButton("C");
+        c.gridx = 1; // El área de texto empieza en la columna uno.
+        c.gridy = 6; // El área de texto empieza en la fila seis
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(borrar, c);
+		borrar.addActionListener(this);
+		
+        //SIGNO IGUAL
+		JButton igual= new JButton("=");
+        c.gridx = 2; // El área de texto empieza en la columna dos.
+        c.gridy = 6; // El área de texto empieza en la fila seis
+        c.gridwidth = 1; // El área de texto ocupa una columna.
+        c.gridheight = 1; // El área de texto ocupa una fila.
+        add(igual, c);
+		igual.addActionListener(this);
+		
 		setVisible(true);
 	}
 	public void actionPerformed(ActionEvent e) {
@@ -131,8 +243,7 @@ class laminas1 extends JPanel implements ActionListener
 			e.getSource().toString().substring(e.getSource().toString().indexOf("text=")+5,e.getSource().toString().indexOf("text=")+6).equals("-") ||
 			e.getSource().toString().substring(e.getSource().toString().indexOf("text=")+5,e.getSource().toString().indexOf("text=")+6).equals("*") ||
 			e.getSource().toString().substring(e.getSource().toString().indexOf("text=")+5,e.getSource().toString().indexOf("text=")+6).equals("/") ||
-			e.getSource().toString().substring(e.getSource().toString().indexOf("text=")+5,e.getSource().toString().indexOf("text=")+6).equals("r") ||
-			e.getSource().toString().substring(e.getSource().toString().indexOf("text=")+5,e.getSource().toString().indexOf("text=")+6).equals("s"))
+			e.getSource().toString().substring(e.getSource().toString().indexOf("text=")+5,e.getSource().toString().indexOf("text=")+6).equals("R"))
 		{
 			caracter=e.getSource().toString().substring(e.getSource().toString().indexOf("text=")+5,e.getSource().toString().indexOf("text=")+6);
 			sentencia=sentencia+caracter;

@@ -67,7 +67,6 @@ class laminaPrimera extends JPanel implements ActionListener
         c.gridwidth = 1; // El área de texto ocupa una columna.
         c.gridheight = 1; // El área de texto ocupa una fila.
         add (texto, c);
-        add(texto, c);
 		CuadroTexto = new JTextField(10);
         c.gridx = 2; // El área de texto empieza en la columna tres.
         c.gridy = 0; // El área de texto empieza en la fila cero
