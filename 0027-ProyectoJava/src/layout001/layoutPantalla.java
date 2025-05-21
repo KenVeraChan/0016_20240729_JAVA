@@ -310,6 +310,20 @@ class laminas1 extends JPanel implements ActionListener
 			  if(sentencia!="")
 			  {
 				  //SI SE INICIA A ESCRIBIR SOBRE EL JTextField
+				  if(comprobante==0 && sentencia!="0" && semaforoComa==0)
+				  {
+		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
+				    //SE PUEDE AÑADIR OTRO CERO
+					sentencia=sentencia+comprobante;
+					pantalla.setText(sentencia); 
+				  }
+				  if(comprobante==0 && sentencia=="0" && semaforoComa==0)
+				  {
+		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
+				    //SE PUEDE AÑADIR OTRO CERO
+					sentencia=sentencia+comprobante;
+					pantalla.setText(sentencia); 
+				  }
 				  if(comprobante==0 && semaforoComa==1)
 				  {
 		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
