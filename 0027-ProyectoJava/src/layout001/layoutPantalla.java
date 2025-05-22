@@ -275,6 +275,8 @@ class laminas1 extends JPanel implements ActionListener
 			pantalla.setText(sentencia);
 			semaforoComa=0;   //Se activa el semaforo para decir que no se podrán poner mas comas
 			numero=0;         //Se reactiva para volver a poner el signo coma
+ 		    resultadoIntermedio="0.0";   //SE REINICIA TAMBIEN ESA VARIABLE
+ 		    resultadoOperacion=0.0;      //SE REINICIA TAMBIEN ESA OTRA VARIABLE
 			}
 		if(caracter.equals("+") || caracter.equals("-") || caracter.equals("*") || caracter.equals("/") || caracter.equals("R")|| caracter.equals("="))
 			{
@@ -305,7 +307,7 @@ class laminas1 extends JPanel implements ActionListener
 					   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
 					   //EN EL CASO DE QUE SEA UNA SUMA  
 					   resultadoOperacion=resultadoOperacion+Double.parseDouble(resultadoIntermedio)+Double.parseDouble(sentencia);
-					   pantalla.setText(Double.toString(resultadoOperacion));
+					   pantalla.setText(String.format("%.3f",resultadoOperacion));
 					   sentencia="0.0";   //SE REINICIA EL VALOR PORQUE YA FUE USADO   
 				   }
 				   if(signo.equals("-"))
@@ -313,7 +315,7 @@ class laminas1 extends JPanel implements ActionListener
 					   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
 					   //EN EL CASO DE QUE SEA UNA SUMA  
 					   resultadoOperacion=resultadoOperacion+Double.parseDouble(resultadoIntermedio)-Double.parseDouble(sentencia);
-					   pantalla.setText(Double.toString(resultadoOperacion));
+					   pantalla.setText(String.format("%.3f",resultadoOperacion));
 					   sentencia="0.0";   //SE REINICIA EL VALOR PORQUE YA FUE USADO   
 				   }
 				   if(signo.equals("*"))
@@ -321,28 +323,39 @@ class laminas1 extends JPanel implements ActionListener
 					   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
 					   //EN EL CASO DE QUE SEA UNA SUMA  
 					   resultadoOperacion=(resultadoOperacion+Double.parseDouble(resultadoIntermedio))*Double.parseDouble(sentencia);
-					   pantalla.setText(Double.toString(resultadoOperacion));
+					   pantalla.setText(String.format("%.3f",resultadoOperacion));
 					   sentencia="0.0";   //SE REINICIA EL VALOR PORQUE YA FUE USADO   
 				   }
 				   if(signo.equals("/"))
 				   {
 					   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
 					   //EN EL CASO DE QUE SEA UNA SUMA  
-					   resultadoOperacion=resultadoOperacion+Double.parseDouble(resultadoIntermedio)/Double.parseDouble(sentencia);
-					   pantalla.setText(Double.toString(resultadoOperacion));
+					   resultadoOperacion=(resultadoOperacion+Double.parseDouble(resultadoIntermedio))/Double.parseDouble(sentencia);
+					   pantalla.setText(String.format("%.3f",resultadoOperacion));
 					   sentencia="0.0";   //SE REINICIA EL VALOR PORQUE YA FUE USADO   
 				   }
-				   if(signo.equals("R"))
+			   }			   
+			   if(signo.equals("R"))
+			   {
+				   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
+				   //EN EL CASO DE QUE SEA UNA SUMA 
+				   if(resultadoOperacion==0)
 				   {
-					   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
-					   //EN EL CASO DE QUE SEA UNA SUMA  
+					   //En el caso de que la primera de las operaciones introducidas, al iniciar la calculadora, sea la raiz
 					   resultadoOperacion=Math.sqrt(Double.parseDouble(resultadoIntermedio));
-					   pantalla.setText(Double.toString(resultadoOperacion));
-					   sentencia="0.0";   //SE REINICIA EL VALOR PORQUE YA FUE USADO   
+					   pantalla.setText(String.format("%.6f",resultadoOperacion));
+					   resultadoIntermedio="0.0"; //Se reinicia la variable 
+				   }
+				   else
+				   {
+					   //En el caso de que la operacion de la raiz ya no sea la primera en ejecutarse, al iniciar la calculadora
+					   resultadoOperacion=Math.sqrt(resultadoOperacion);
+					   pantalla.setText(String.format("%.6f",resultadoOperacion));
+					   resultadoIntermedio="0.0"; //Se reinicia la variable 
 				   }
 			   }
 			}
-		if(caracter.equals("1") || caracter.equals("2") ||caracter.equals("3") ||caracter.equals("4") ||caracter.equals("5") ||caracter.equals("6") ||caracter.equals("7") ||caracter.equals("8") ||caracter.equals("9") ||caracter.equals("0"))
+		if(caracter.equals("1") || caracter.equals("2") || caracter.equals("3") || caracter.equals("4") || caracter.equals("5") || caracter.equals("6") || caracter.equals("7") || caracter.equals("8") ||caracter.equals("9") || caracter.equals("0"))
 			{
 			 int resul=0;
 			  comprobante=Integer.parseInt(caracter);
