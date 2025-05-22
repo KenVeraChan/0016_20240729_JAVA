@@ -47,11 +47,12 @@ class laminas1 extends JPanel implements ActionListener
 	private static int numero=0;
 	private static String sentencia="";
 	private static int comprobante=0;
-	private static String caracter="";
+	private static String caracter;
 	private static int semaforoComa=0;
 	private static String resultadoIntermedio="";
 	private static String signo="";
 	private static int registro=0;
+	private static double  resultadoOperacion=0.0;
 	TextField pantalla = new TextField("Hola Mundo",13);
 	public laminas1()
 	{
@@ -175,7 +176,7 @@ class laminas1 extends JPanel implements ActionListener
 		nueve.addActionListener(this);
 
         //SIGNO COMA
-		JButton coma= new JButton(",");
+		JButton coma= new JButton(".");   //Para operaciones con DOUBLE el signo ortografico "." viene mejor que el ","
         c.gridx = 1; // El �rea de texto empieza en la columna uno.
         c.gridy = 4; // El �rea de texto empieza en la fila cuatro
         c.gridwidth = 1; // El �rea de texto ocupa una columna.
@@ -260,7 +261,7 @@ class laminas1 extends JPanel implements ActionListener
 		//SE EXTRAE EL CARACTER PULSADO
 		caracter=e.getSource().toString().substring(e.getSource().toString().indexOf("text=")+5,e.getSource().toString().indexOf("text=")+6);
 		//SE PROCECE CON LAS CONDICIONALES
-		if(caracter.equals(",") && semaforoComa==0)
+		if(caracter.equals(".") && semaforoComa==0)
 			{
 			//SIGNO DE LA COMA
 			sentencia=sentencia.concat(caracter);
@@ -277,16 +278,16 @@ class laminas1 extends JPanel implements ActionListener
 			}
 		if(caracter.equals("+") || caracter.equals("-") || caracter.equals("*") || caracter.equals("/") || caracter.equals("R")|| caracter.equals("="))
 			{
-			   if(sentencia.equals(""))
+			   if(caracter.equals(""))
 			   {
 				   //NO HACE NADA PORQUE NO HABÍA NINGUN NUMERO ESCRITO PREVIAMENTE
 			   }
-			   if(!sentencia.equals("") || caracter.equals("+") || caracter.equals("-") || caracter.equals("*") || caracter.equals("/"))
+			   if(!caracter.equals("") || caracter.equals("+") || caracter.equals("-") || caracter.equals("*") || caracter.equals("/"))
 			   {
 					if(registro==0)
 					{
-				   		resultadoIntermedio=sentencia;   //SE GUARDA EL DATO ANTERIOR
-						signo=sentencia;  //SE GUARDA EL TIPO DE SIGNO
+						resultadoIntermedio=sentencia;
+						signo=caracter;  //SE GUARDA EL TIPO DE SIGNO
 						sentencia="";     //SE BORRA PARA INICIAR DE NUEVO LA RECOGIDA DE DATOS
 						pantalla.setText("");
 						registro=1;    //SE EVITA QUE SE META OTRO SIGNO TRAS LA INTRODUCCION DEL SEGUNDO NUMERO
@@ -297,89 +298,71 @@ class laminas1 extends JPanel implements ActionListener
 						//NO HACE NADA PORQUE NO SE PUEDE HACER UNA SEGUNDA OPERACION SIN HABERLE DADO AL IGUAL
 					}
 			   }
-			   if(sentencia.equals("="))
+			   if(caracter.equals("="))
 			   {
-				   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
-				   System.out.println("NUMERO 1: "+resultadoIntermedio+" NUMERO 2: "+ sentencia);
-				   pantalla.setText(Double.toString(Double.parseDouble(resultadoIntermedio)+Double.parseDouble(sentencia)));
+				   if(signo.equals("+"))
+				   {
+					   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
+					   //EN EL CASO DE QUE SEA UNA SUMA  
+					   resultadoOperacion=resultadoOperacion+Double.parseDouble(resultadoIntermedio)+Double.parseDouble(sentencia);
+					   pantalla.setText(Double.toString(resultadoOperacion));
+					   sentencia="0.0";   //SE REINICIA EL VALOR PORQUE YA FUE USADO   
+				   }
+				   if(signo.equals("-"))
+				   {
+					   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
+					   //EN EL CASO DE QUE SEA UNA SUMA  
+					   resultadoOperacion=resultadoOperacion+Double.parseDouble(resultadoIntermedio)-Double.parseDouble(sentencia);
+					   pantalla.setText(Double.toString(resultadoOperacion));
+					   sentencia="0.0";   //SE REINICIA EL VALOR PORQUE YA FUE USADO   
+				   }
+				   if(signo.equals("*"))
+				   {
+					   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
+					   //EN EL CASO DE QUE SEA UNA SUMA  
+					   resultadoOperacion=(resultadoOperacion+Double.parseDouble(resultadoIntermedio))*Double.parseDouble(sentencia);
+					   pantalla.setText(Double.toString(resultadoOperacion));
+					   sentencia="0.0";   //SE REINICIA EL VALOR PORQUE YA FUE USADO   
+				   }
+				   if(signo.equals("/"))
+				   {
+					   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
+					   //EN EL CASO DE QUE SEA UNA SUMA  
+					   resultadoOperacion=resultadoOperacion+Double.parseDouble(resultadoIntermedio)/Double.parseDouble(sentencia);
+					   pantalla.setText(Double.toString(resultadoOperacion));
+					   sentencia="0.0";   //SE REINICIA EL VALOR PORQUE YA FUE USADO   
+				   }
+				   if(signo.equals("R"))
+				   {
+					   registro=0;  //SE DESACTIVA PARA TRABAJAR CON LA SIGUIENTE OPERACION
+					   //EN EL CASO DE QUE SEA UNA SUMA  
+					   resultadoOperacion=Math.sqrt(Double.parseDouble(resultadoIntermedio));
+					   pantalla.setText(Double.toString(resultadoOperacion));
+					   sentencia="0.0";   //SE REINICIA EL VALOR PORQUE YA FUE USADO   
+				   }
 			   }
 			}
 		if(caracter.equals("1") || caracter.equals("2") ||caracter.equals("3") ||caracter.equals("4") ||caracter.equals("5") ||caracter.equals("6") ||caracter.equals("7") ||caracter.equals("8") ||caracter.equals("9") ||caracter.equals("0"))
 			{
+			 int resul=0;
 			  comprobante=Integer.parseInt(caracter);
-			  if(sentencia!="")
+
+			  for(int i=0;i<sentencia.length();i++)
 			  {
-				  //SI SE INICIA A ESCRIBIR SOBRE EL JTextField
-				  if(comprobante==0 && sentencia!="0" && semaforoComa==0)
-				  {
-		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
-				    //SE PUEDE AÑADIR OTRO CERO
-					sentencia=sentencia+comprobante;
-					pantalla.setText(sentencia); 
-				  }
-				  if(comprobante==0 && sentencia=="0" && semaforoComa==0)
-				  {
-		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
-				    //SE PUEDE AÑADIR OTRO CERO
-					sentencia=sentencia+comprobante;
-					pantalla.setText(sentencia); 
-				  }
-				  if(comprobante==0 && semaforoComa==1)
-				  {
-		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
-				    //SE PUEDE AÑADIR OTRO CERO
-					sentencia=sentencia+comprobante;
-					pantalla.setText(sentencia); 
-				  }
-				  if(comprobante!=0 && semaforoComa==0)
-				  {
-		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
-				    //SE PUEDE AÑADIR OTRO DIGITO TRAS ESCRIBIR LA COMA
-						sentencia=sentencia+comprobante;
-						pantalla.setText(sentencia); 
-				  }
-				  if(comprobante!=0 && semaforoComa==1)
-				  {
-		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
-				    //SE PUEDE AÑADIR OTRO DIGITO TRAS ESCRIBIR LA COMA
-					sentencia=sentencia+comprobante;
-					pantalla.setText(sentencia); 
-				  }
+				  if(sentencia.charAt(i)=='0' && sentencia.charAt(i)!=',')
+					  {
+					  	resul=resul+1;  //Se cuenta la cantidad de 0 que hay sin haberle incluido una coma
+					  }
 			  }
-			  if(sentencia=="")
+			  if(resul==sentencia.length() && sentencia!="")
 			  {
-				  //SI SE INICIA A ESCRIBIR SOBRE EL JTextField
-				  if(comprobante==0 && semaforoComa==0 && numero==0)
-				  {
-		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y SIN COMA REGISTRADA
-				    //NO SE PUEDE METER NINGUN NUMERO HASTA DETECTAR LA COMA METIDA
-					//numero INDICA SI TIENE COMA O NO
-					sentencia=sentencia+comprobante;
-					pantalla.setText(sentencia); 
-					numero=1;   //Se activa para proceder con el siguiente numero no cero
-				  }
-				  if(comprobante==0 && semaforoComa==1 && numero!=0)
-				  {
-		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
-				    //SE PUEDE AÑADIR OTRO CERO
-					sentencia=sentencia+comprobante;
-					pantalla.setText(sentencia); 
-				  }
-				  if(comprobante!=0 && semaforoComa==0)
-				  {
-		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
-					//SE PUEDE AÑADIR UN PRIMER DIGITO QUE NO SEA CERO
-					sentencia=sentencia+comprobante;
-					pantalla.setText(sentencia); 
-				  }
-				  if(comprobante!=0 && semaforoComa==1)
-				  {
-		  			//SI EL PRIMER DIGITO METIDO ES UN 0 Y LUEGO UNA COMA
-				    //SE PUEDE AÑADIR OTRO DIGITO TRAS ESCRIBIR LA COMA
-					sentencia=sentencia+comprobante;
-					pantalla.setText(sentencia); 
-				  }
+				  //NUMERO DE CEROS ENCONTADOS ANTES DE UNA COMA 
 			  }
-	    }
+			  else
+			  {
+				sentencia=sentencia+comprobante;
+				pantalla.setText(sentencia);
+			  }
+	    	}
      }
 }
