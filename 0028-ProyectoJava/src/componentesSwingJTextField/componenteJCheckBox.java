@@ -3,9 +3,15 @@ package componentesSwingJTextField;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class componenteJCheckBox {
@@ -38,11 +44,34 @@ class fondoCheckBox extends JFrame
 		setVisible(true);
 	}
 }
-class laminaCheckBox extends JPanel 
+class laminaCheckBox extends JPanel implements ActionListener
 {
+	JLabel enunciado1= new JLabel("Cursiva");
+	JLabel enunciado2= new JLabel("Negrita");
+	JCheckBox cambioLetra1 = new JCheckBox("Negrita");
+	JCheckBox cambioLetra2 = new JCheckBox("Cursiva");
+	JTextArea espacioTrabajo= new JTextArea("Hola Mundo",4,12);
+	BorderLayout orden= new BorderLayout();
+	JScrollPane scrolleado;
 	public laminaCheckBox()
 	{
+		setLayout(orden);   //Impone el Layout
 		setBackground(new Color(80,200,120));
-		JCheckBox chequeado = new JCheckBox();
+		add(new JScrollPane(espacioTrabajo),BorderLayout.CENTER);
+		enunciado1.setName("Label1");
+		enunciado2.setName("Label2");
+		add(enunciado1,BorderLayout.EAST);
+		add(enunciado2,BorderLayout.WEST);
+		add(cambioLetra1,BorderLayout.EAST);
+		add(cambioLetra2,BorderLayout.WEST);
+		cambioLetra1.addActionListener(this);
+		cambioLetra2.addActionListener(this);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().toString().contains("Cursiva"))
+		{
+			//Se ha pulsado el checkbox de poner en cursiva
+		}
+		
 	}
 }
