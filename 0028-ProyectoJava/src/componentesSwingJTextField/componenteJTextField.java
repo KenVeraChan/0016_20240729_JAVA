@@ -14,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
 
 public class componenteJTextField {
 
@@ -73,6 +76,12 @@ class laminaPrimera extends JPanel implements ActionListener
         c.gridwidth = 2; // El área de texto ocupa dos columnas.
         c.gridheight = 1; // El área de texto ocupa una fila.
         add(CuadroTexto, c);
+        
+        //Añadiremos un oyente para el cuadro de texto 
+        //Guardado en la avariable objeto el miDocumento del JextField declarado antes
+        Document miDocumento= CuadroTexto.getDocument();     //Se ha declarado la interfz guardada en miDocumento y se la ha asignado a un objeto JTextField llamando al metodo getDocument
+        miDocumento.addDocumentListener(new EscuchaTexto());
+        
 		textoReceptor= new JLabel("PASSWORD: ",JLabel.LEFT);
         c.gridx = 0; // El área de texto empieza en la columna cero.
         c.gridy = 1; // El área de texto empieza en la fila uno
@@ -98,4 +107,19 @@ class laminaPrimera extends JPanel implements ActionListener
 		System.out.println("El texto escrito es: "+CuadroTexto.getText());
 		CuadroReceptor.setText(CuadroTexto.getText());
 	}
+	private class EscuchaTexto implements DocumentListener
+	{
+		//Clase interna privada para habilitar el proceso de la llamada y el oyente en el JTextField creado mas arriba 
+
+		public void insertUpdate(DocumentEvent e) {
+			System.out.println("Has escrito algo, termina de hacerlo");
+		}
+		public void removeUpdate(DocumentEvent e) {
+			System.out.println("Has borrado algo");
+		}
+		public void changedUpdate(DocumentEvent e) {
+			// TODO Auto-generated method stub	
+		}
+	}
 }
+
