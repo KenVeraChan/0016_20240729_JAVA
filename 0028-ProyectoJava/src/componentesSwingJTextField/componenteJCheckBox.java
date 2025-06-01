@@ -53,6 +53,8 @@ class laminaCheckBox extends JPanel implements ActionListener
 	JTextArea espacioTrabajo= new JTextArea("Hola Mundo",4,12);
 	BorderLayout orden= new BorderLayout();
 	JScrollPane scrolleado;
+	private static int negrita=0;  //Para el conteo de las pulsaciones
+	private static int cursiva=0;   //Para el conteo de las pulsaciones
 	public laminaCheckBox()
 	{
 		setLayout(orden);   //Impone el Layout
@@ -70,8 +72,38 @@ class laminaCheckBox extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().toString().contains("Cursiva"))
 		{
-			//Se ha pulsado el checkbox de poner en cursiva
+			cursiva++;  //Se ha activado la cursiva una vez mas
+			if(cursiva%2!=0)
+			{
+				//Se ha pulsado el checkbox de poner en cursiva
+				System.out.println("SE PULSO CURSIVA");
+				espacioTrabajo.setFont(new Font("Cursiva", Font.ITALIC, 12));
+			}
+			else 
+			{
+				//Modo inactivo de checkbox lo devuelve a su fuente inicial
+				//Se ha pulsado el checkbox de NO poner en Negrita
+				System.out.println("SE PULSO PARA QUITAR NEGRITA");
+				espacioTrabajo.setFont(new Font("Normal", Font.PLAIN, 12));  //Es el tipo y tamanio de fuente por defecto
+			}
 		}
-		
+		if(e.getSource().toString().contains("Negrita"))
+		{
+			negrita++; //Se ha activado la cursiva una vez mas
+			if(negrita%2!=0)
+			{
+				//Modo activo de checkbox
+				//Se ha pulsado el checkbox de poner en Negrita
+				System.out.println("SE PULSO NEGRITA");
+				espacioTrabajo.setFont(new Font("Negrita", Font.BOLD, 12));
+			}
+			else 
+			{
+				//Modo inactivo de checkbox lo devuelve a su fuente inicial
+				//Se ha pulsado el checkbox de NO poner en Negrita
+				System.out.println("SE PULSO PARA QUITAR NEGRITA");
+				espacioTrabajo.setFont(new Font("Normal", Font.PLAIN, 12));  //Es el tipo y tamanio de fuente por defecto
+			}
+		}
 	}
 }
