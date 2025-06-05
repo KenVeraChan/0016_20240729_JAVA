@@ -1,4 +1,4 @@
-package componentesSwingJTextField;
+package componentesSwingElementales;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -34,7 +34,7 @@ class menuEmergente extends JPanel implements ActionListener
 	public menuEmergente()
 	{
 		menu= new JPopupMenu("Menu emergente");
-		JMenuItem opcion1= new JMenuItem();
+		JMenuItem opcion1= new JMenuItem("ROJO");
 		menu.add(opcion1);
 		JMenuItem opcion2= new JMenuItem("VERDE");
 		menu.add(opcion2);
