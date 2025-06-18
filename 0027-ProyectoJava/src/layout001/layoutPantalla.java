@@ -5,9 +5,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.TextField;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,23 +19,30 @@ import javax.swing.JPanel;
 public class layoutPantalla {
  
 public static void main(String[] args) {
-               // TODO Auto-generated method stub
-               MarcoGlobal ventana= new MarcoGlobal();
-               ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // TODO Auto-generated method stub
+       MarcoGlobal ventana= new MarcoGlobal();
+       ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 }
 }
 class MarcoGlobal extends JFrame
 {
 	public MarcoGlobal()
 	{
-	               setTitle("Practicas de Layout");
-	               setBounds(400,200,250,250);
-	               setResizable(false);
-	               laminas0 fondoLamina= new laminas0();
-	               laminas1 nuevaLamina1= new laminas1();
-	               add(fondoLamina);
-	               add(nuevaLamina1);
-	               setVisible(true);
+       setTitle("Practicas de Layout");
+       setBounds(400,200,250,250);
+       setResizable(false);
+       laminas0 fondoLamina= new laminas0();
+       laminas1 nuevaLamina1= new laminas1();
+       add(fondoLamina);
+       add(nuevaLamina1);
+       //USO DE RECURSOS EXTERNOS
+       Toolkit mihardware=Toolkit.getDefaultToolkit();
+       	//Se le dice que la ruta de la imagen se encuentra en el paquete src/layout001 dentro de la clase actual por eso se pone .class
+       URL rutaImagen=MarcoGlobal.class.getResource("/layout001/laTierra.png");
+       Image icono= mihardware.getImage(rutaImagen);
+       setIconImage(icono);
+       
+       setVisible(true);
 	}
 }
 class laminas0 extends JPanel
