@@ -1,7 +1,6 @@
 package excepcionesJava002;
 
 import java.util.Scanner;
-import java.io.IOException;
 import java.util.*;
 public class EntradaDatos {
 
