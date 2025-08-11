@@ -123,7 +123,7 @@ class PelotaThreads implements Runnable
 {
 	private Pelota pelota;
 	private Component lamina;
-	
+	 
 	public PelotaThreads(Pelota pelota, Component lamina) 
 	{
 		this.pelota = pelota;
