@@ -1,5 +1,7 @@
 package aplicacionBancaria;
 
+import java.util.concurrent.locks.*;
+
 public class SucursalMutiHilo {
 
 	public static void main(String[] args) {
@@ -13,39 +15,51 @@ public class SucursalMutiHilo {
 		//Propuesta de creación de 100 hilos
 		//Arrays de objetos
 		//Clase genérica para el array de objetos
-		
-		creacionHilos sucursales= new creacionHilos();  //SE CREA
-	    sucursales.start();  //SE INICIA
+		entidadBancaria miBanco= new entidadBancaria();
+		for(int i=0;i<100;i++)
+		{
+			creacionHilos sucursales= new creacionHilos(miBanco,i,2000);  //SE CREA
+			Thread hilo= new Thread(sucursales);
+			hilo.start();     //Se INICIA
+		}
 	}
 }
-class creacionHilos extends Thread
+class creacionHilos implements Runnable
 {	
-    private int min = 0;
-    private int max = 99;
-    private int transferencia = 500; //De momento la transferencia entre cuentas sera de valor constante
-	private static int randomIntEntrada=0;
-	private static int randomIntSalida=0;
-	entidadBancaria transacciones;
+	private int randomIntSalida=0;
+	private entidadBancaria mibanco;
+	private double cantidadMaxima=0;
+	
+	public creacionHilos(entidadBancaria miBanco, int cuentaOrigen, double cantidadMaxima)
+	{
+		this.mibanco=miBanco;
+		this.randomIntSalida=cuentaOrigen;
+		this.cantidadMaxima=cantidadMaxima;
+	}
+	
 	public void run()
 	{
-	    transacciones= new entidadBancaria();   //SOLO SE INSTANCIA UNA VEZ
 		while(true)
 		{
+			double transferencia = Math.random()*this.cantidadMaxima; //De momento la transferencia entre cuentas sera de valor constante
 		 // Generar un entero aleatorio entre 1 y 10 (incluyendo 1 y 10)
-		    randomIntEntrada = (int) (Math.random() * (this.max - this.min + 1)) + this.min;
-		    randomIntSalida = (int) (Math.random() * (this.max - this.min + 1)) + this.min;
-			transacciones.transferencia(randomIntSalida, randomIntEntrada, transferencia);
-	     //transacciones.transferencia((int)currentThread().toString().charAt(7), randomIntEntrada, transferencia)
+		    int randomIntEntrada = (int) (Math.random()*100);
+		    this.mibanco.transferencia(this.randomIntSalida, randomIntEntrada, transferencia);
+		    try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
 class entidadBancaria
 {
+	private Lock bloqueaBanco= new ReentrantLock();    //Encapsulacion de interfaz Lock
+	private Condition saldoSuficiente;   //Encapsulacion de interfaz Condition
+	
 	private final double cuentasBancarias[];
-	private int cuentaOrigen=0;
-	private int cuentaDestino=0;
-	private double transferencia=0;
-	private static double total=0; 
 	
 	public entidadBancaria()
 	{
@@ -54,39 +68,49 @@ class entidadBancaria
 		{
 			cuentasBancarias[i]=2000;   //Saldo inicial de todas las cuentas bancarias
 		}
+		saldoSuficiente= bloqueaBanco.newCondition();
 	}
-	public void transferencia(int cuentaOrigen, int cuentaDestino, int transferencia)
+	public void transferencia(int cuentaOrigen, int cuentaDestino, double transferencia)
 	{
-		this.cuentaOrigen=cuentaOrigen;
-		this.cuentaDestino=cuentaDestino;
-		this.transferencia=transferencia;
-		impresoPantalla();
-	}
-	public void impresoPantalla()
-	{
-	//PROCESO DE TRANSFERENCIA
-		if(cuentasBancarias[this.cuentaOrigen]<this.transferencia)
-		{
-			//No se ejecuta la transferencia
-		}
-		else
-		{
-			cuentasBancarias[this.cuentaOrigen]=cuentasBancarias[this.cuentaOrigen]-this.transferencia;
-			cuentasBancarias[this.cuentaDestino]=cuentasBancarias[this.cuentaDestino]+this.transferencia;
-		//IMPRESO POR PANTALLA
-			System.out.println("");
-			System.out.println("Cuenta Origen: "+this.cuentaOrigen+" tiene de saldo: "+cuentasBancarias[this.cuentaOrigen]);
-			System.out.println("Cuenta destino: "+this.cuentaDestino+" tiene de saldo: "+cuentasBancarias[this.cuentaDestino]);
-			System.out.println("Valor de la transferencia: "+this.transferencia);
-		//VALOR DE TODAS LAS CUENTAS
-			for(int i=0;i<this.cuentasBancarias.length;i++)
-			{
-				total=total+this.cuentasBancarias[i];
+		bloqueaBanco.lock();
+		try {
+			//PROCESO DE TRANSFERENCIA
+				//if(cuentasBancarias[cuentaOrigen]<transferencia)
+				//{
+				//	//No se ejecuta la transferencia
+				//}
+				while(cuentasBancarias[cuentaOrigen]<transferencia) saldoSuficiente.await();
+				if(cuentasBancarias[cuentaOrigen]>transferencia)
+				{
+					cuentasBancarias[cuentaOrigen]-=transferencia;
+					cuentasBancarias[cuentaDestino]+=transferencia;
+				//IMPRESO POR PANTALLA
+					System.out.println("");
+					System.out.println("Cuenta Origen: "+cuentaOrigen+" tiene de saldo: "+String.format("%.2f",cuentasBancarias[cuentaOrigen]));
+					System.out.println("Cuenta destino: "+cuentaDestino+" tiene de saldo: "+String.format("%.2f",cuentasBancarias[cuentaDestino]));
+		
+					System.out.println("Valor de la transferencia: "+String.format("%.2f",transferencia));
+		
+					System.out.println("El valor del total en el banco es de : "+getSaldoTotal(cuentasBancarias));
+					System.out.println("");
+				}
+				saldoSuficiente.signalAll();  //Todos los hilos que han pasado por este punto despiertan a los que se quedaron dormidos al no cumplirse con la sentencia
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				bloqueaBanco.unlock();
 			}
-			System.out.println("El valor del total en el banco es de : "+total);
-			System.out.println("");
-			total=0; //Se reinicia la variable
+	}	
+	public String getSaldoTotal(double[] cuentasBancarias)
+	{
+		//VALOR DE TODAS LAS CUENTAS
+		double total=0;   //Se reinicia el valor
+		for(int i=0;i<cuentasBancarias.length;i++)
+		{
+			total=total+cuentasBancarias[i];
 		}
+		return String.format("%.2f",total);
+	
 	}
 }
-

@@ -1,0 +1,241 @@
+package aplicacionBancaria;
+
+public class SucursalMutiHilo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//MEOTOD 3 DE LA REALIZACION DEL EJERCICIO 
+		//Apertura de 100 cuentas corrientes
+		//Cada cuenta con un saldo inicial de 2000 EUROS
+		//Saldo total en el banco de 200.000 EUROS
+		//Se realizarán transferencias de forma infinita
+		
+		//Propuesta de creación de 100 hilos
+		//Arrays de objetos
+		//Clase genérica para el array de objetos
+		
+		 creacionHilos banco []= new creacionHilos[100];
+		 for(int i=0; i<banco.length;i++)
+		 {
+			 banco[i]= new creacionHilos();  //SE CREA
+			 banco[i].start();  //SE INICIA
+			 System.out.println("La cuenta: "+banco[i].getName()+" tiene de SALDO:"+banco[i].verSaldo()+"€");
+		 }
+		 int i=0;
+	     int min = 0;
+	     int max = 99;
+	     int transferencia = 500; //De momento la transferencia entre cuentas sera de valor constante
+		 int saldoTotal=0;
+		 
+	     while(true)
+		 {
+			 // Generar un entero aleatorio entre 1 y 10 (incluyendo 1 y 10)
+		     int randomIntSalida = (int) (Math.random() * (max - min + 1)) + min;
+		     int randomIntEntrada = (int) (Math.random() * (max - min + 1)) + min;
+
+		     if( banco[randomIntSalida].verSaldo()<500)
+		     {
+		    	 //No hace nada porque no se puede retirar dinero por falta de efectivo
+		     }
+		     else 
+		     {
+			     banco[randomIntSalida].retirarDinero();
+			     banco[randomIntEntrada].ingresarDinero();
+				 System.out.println("");
+				 System.out.println(banco[randomIntSalida].getName()+" tiene de saldo: "+ banco[randomIntSalida].verSaldo()+"€");
+				 System.out.println(banco[randomIntEntrada].getName()+" tiene de saldo: "+ banco[randomIntEntrada].verSaldo()+"€");
+		     }
+	     	for(i=0; i<banco.length;i++)
+			 {
+				 saldoTotal=saldoTotal+banco[i].verSaldo();
+			 }
+			 System.out.println("El saldo total es: "+saldoTotal+"€");
+			 saldoTotal=0;  //Se reinicia la variable para no contabilizar lo de la iteracion anterior
+		 }
+	}
+}
+class creacionHilos extends Thread
+{
+	private int saldo=2000;
+	
+	public void run()
+	{
+		//Lo que hara
+		
+		
+		
+		
+	}
+	public void retirarDinero()
+	{
+			this.saldo=this.saldo-500;
+	}
+	public void ingresarDinero()
+	{
+		this.saldo=this.saldo+500;
+	}
+	public int verSaldo()
+	{
+		return this.saldo;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+		//Lo que hara
+		 int i=0;
+	     int min = 0;
+	     int max = 99;
+	     int transferencia = 500; //De momento la transferencia entre cuentas sera de valor constante
+		 int saldoTotal=0;
+		 
+	     while(true)
+		 {
+			 // Generar un entero aleatorio entre 1 y 10 (incluyendo 1 y 10)
+		     int randomIntSalida = (int) (Math.random() * (max - min + 1)) + min;
+		     int randomIntEntrada = (int) (Math.random() * (max - min + 1)) + min;
+
+		     if( banco[randomIntSalida].verSaldo()<500)
+		     {
+		    	 //No hace nada porque no se puede retirar dinero por falta de efectivo
+		     }
+		     else 
+		     {
+			     banco[randomIntSalida].retirarDinero();
+			     banco[randomIntEntrada].ingresarDinero();
+				 System.out.println("");
+				 System.out.println(banco[randomIntSalida].getName()+" tiene de saldo: "+ banco[randomIntSalida].verSaldo()+"€");
+				 System.out.println(banco[randomIntEntrada].getName()+" tiene de saldo: "+ banco[randomIntEntrada].verSaldo()+"€");
+		     }
+	     	for(i=0; i<banco.length;i++)
+			 {
+				 saldoTotal=saldoTotal+banco[i].verSaldo();
+			 }
+			 System.out.println("El saldo total es: "+saldoTotal+"€");
+			 saldoTotal=0;  //Se reinicia la variable para no contabilizar lo de la iteracion anterior
+		 }	
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+PROGRAMA FINAL
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+package aplicacionBancaria;
+
+public class SucursalMutiHilo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//MEOTOD 3 DE LA REALIZACION DEL EJERCICIO 
+		//Apertura de 100 cuentas corrientes
+		//Cada cuenta con un saldo inicial de 2000 EUROS
+		//Saldo total en el banco de 200.000 EUROS
+		//Se realizarán transferencias de forma infinita
+		
+		//Propuesta de creación de 100 hilos
+		//Arrays de objetos
+		//Clase genérica para el array de objetos
+		entidadBancaria miBanco= new entidadBancaria();
+		for(int i=0;i<100;i++)
+		{
+			creacionHilos sucursales= new creacionHilos(miBanco,i,2000);  //SE CREA
+			Thread hilo= new Thread(sucursales);
+			hilo.start();     //Se INICIA
+		}
+	}
+}
+class creacionHilos implements Runnable
+{	
+	private int randomIntSalida=0;
+	private entidadBancaria mibanco;
+	private double cantidadMaxima=0;
+	
+	public creacionHilos(entidadBancaria miBanco, int cuentaOrigen, double cantidadMaxima)
+	{
+		this.mibanco=miBanco;
+		this.randomIntSalida=cuentaOrigen;
+		this.cantidadMaxima=cantidadMaxima;
+	}
+	
+	public void run()
+	{
+		while(true)
+		{
+			double transferencia = Math.random()*this.cantidadMaxima; //De momento la transferencia entre cuentas sera de valor constante
+		 // Generar un entero aleatorio entre 1 y 10 (incluyendo 1 y 10)
+		    int randomIntEntrada = (int) (Math.random()*100);
+		    this.mibanco.transferencia(this.randomIntSalida, randomIntEntrada, transferencia);
+		    try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}
+class entidadBancaria
+{
+	private final double cuentasBancarias[];
+	
+	public entidadBancaria()
+	{
+		this.cuentasBancarias = new double[100];
+		for(int i=0;i<this.cuentasBancarias.length;i++)
+		{
+			cuentasBancarias[i]=2000;   //Saldo inicial de todas las cuentas bancarias
+		}
+	}
+	public void transferencia(int cuentaOrigen, int cuentaDestino, double transferencia)
+	{
+	//PROCESO DE TRANSFERENCIA
+		if(cuentasBancarias[cuentaOrigen]<transferencia)
+		{
+			//No se ejecuta la transferencia
+		}
+		else
+		{
+			cuentasBancarias[cuentaOrigen]-=transferencia;
+			cuentasBancarias[cuentaDestino]+=transferencia;
+		//IMPRESO POR PANTALLA
+			System.out.println("");
+			System.out.println("Cuenta Origen: "+cuentaOrigen+" tiene de saldo: "+String.format("%.2f",cuentasBancarias[cuentaOrigen]));
+			System.out.println("Cuenta destino: "+cuentaDestino+" tiene de saldo: "+String.format("%.2f",cuentasBancarias[cuentaDestino]));
+
+			System.out.println("Valor de la transferencia: "+String.format("%.2f",transferencia));
+
+			System.out.println("El valor del total en el banco es de : "+getSaldoTotal(cuentasBancarias));
+			System.out.println("");
+		}
+	}
+	public String getSaldoTotal(double[] cuentasBancarias)
+	{
+		//VALOR DE TODAS LAS CUENTAS
+		double total=0;   //Se reinicia el valor
+		for(int i=0;i<cuentasBancarias.length;i++)
+		{
+			total=total+cuentasBancarias[i];
+		}
+		return String.format("%.2f",total);
+	}
+}
+
