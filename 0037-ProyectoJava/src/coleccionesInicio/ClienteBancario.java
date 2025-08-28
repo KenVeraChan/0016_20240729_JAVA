@@ -21,9 +21,9 @@ public class ClienteBancario {
 		clientesDelBando.add(cliente5);
 		
 		//Se recorre con un bucle for each
-		for (cliente cliente : clientesDelBando) 
+		for (cliente clientes : clientesDelBando) 
 		{
-			System.out.println(cliente.getNombre()+" "+cliente.getnCuenta()+" "+cliente.getSaldo());
+			System.out.println(clientes.getNombre()+" "+clientes.getnCuenta()+" "+clientes.getSaldo());
 		}
 	}
 
